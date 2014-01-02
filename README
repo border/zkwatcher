@@ -1,2 +1,62 @@
 zkwatcher a zookeeper demo
 
+目前zookeeper 部署在10.81.13.45 机器上, 端口 9001-9006
+
+1. build
+cd zkwatcher
+make
+在当前目录下面生成一个 zkwatcher 的执行文件.
+
+2. 运行 ./zkwatcher
+默认会在创建 /zkwatcher 节点.
+并且监听 /zkwatcher 下子节点的创建, 删除以及修改
+
+$ ./zkwatcher
+    zoo_create /zkwatcher node
+    create_root /zkwatcher already create
+    Start watcher /zkwatcher children node
+    add_children_watch_on path: /zkwatcher
+
+3. 使用zookeeper客户端工具cli_mt
+$ cd libs/zookeeper/bin/
+$ ls  
+    cli_mt  cli_st  load_gen    
+$ ./cli_mt 10.81.13.45:9001
+Watcher SESSION_EVENT state = CONNECTED_STATE
+Got a new session id: 0x14347f752200010
+
+可以通过输入help来获取帮助信息.
+    create [+[e|s]] <path>
+    delete <path>
+    set <path> <data>
+    get <path>
+    ls <path>
+    ls2 <path>
+    sync <path>
+    exists <path>
+    wexists <path>
+    myid
+    verbose
+    addauth <id> <scheme>
+    quit
+
+    prefix the command with the character 'a' to run the command asynchronously.
+    run the 'verbose' command to toggle verbose logging.
+    i.e. 'aget /foo' to get /foo asynchronously
+
+create 创建节点
+delete 删除节点
+set 设置节点
+get 获取节点的数据
+
+4. 使用cli_mt
+在cli_mt里面输入
+ls /zkwatcher  // 获取/zkwatcher 节点子节点的信息
+create /zkwatcher/item1     // 创建子节点item1
+create /zkwatcher/item2    //  创建子节点item1
+ls /zkwatcher       // 查看
+set /zkwatcher/item1 value1   // 设置 item1 数据
+set /zkwatcher/item2 value1   // 设置 item2 数据
+get /zkwatcher/item1    // 获取item1节点数据
+
+在设置 /zkwatcher 子节点数据的时候可以观察一下 zkwatcher 的日志, 查看修改的节点信息

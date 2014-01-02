@@ -155,7 +155,7 @@ int create_root(zhandle_t *zkhandle, const char *node_name, const char *data) {
     int 
 main(int argc, const char *argv[])
 {
-    const char* host = "127.0.0.1:9002, 127.0.0.1:9003";
+    const char* host = "10.81.13.45:9002, 10.81.13.45:9003";
     zhandle_t* zkhandle;
     int timeout = 5000;
     int ret = 0;
