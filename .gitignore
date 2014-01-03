@@ -1,3 +1,4 @@
 tags
 *.o
 zkwatcher
+*.dSYM
